@@ -20,38 +20,14 @@ def main():
         --format, -f: Optional output display format (hex, bytes, or c-array).
     """
     parser = argparse.ArgumentParser(description ="A XOR obfuscation tool.")
-    parser.add_argument(
-        '--input',
-        '-i',
-        type=str,
-        required=True,
-        dest='input_file',
-        help='The name of the input file.'
-    )
-    parser.add_argument(
-        '--output',
-        '-o',
-        type=str,
-        required=True,
-        dest='output_file',
-        help='The name of the output file.'
-    )
-    parser.add_argument(
-        '--key',
-        '-k',
-        type=str,
-        required=True,
-        dest='input_key',
-        help='1 byte hexadecimal string.'
-    )
-    parser.add_argument(
-        '--format',
-        '-f',
-        type=str,
-        choices=["hex", "bytes", "c-array"],
-        dest='input_format',
-        help='Choose a format to output the ciphertext. Options: hex, bytes, c-array. [Optional]'
-    )
+    parser.add_argument('--input','-i', required=True,dest='input_file',
+    help='The name of the input file.')
+    parser.add_argument('--output','-o', required=True,dest='output_file',
+    help='The name of the output file.')
+    parser.add_argument('--key','-k', required=True,dest='input_key',
+    help='1 byte hexadecimal string.')
+    parser.add_argument('--format','-f', choices=["hex", "bytes", "c-array"],dest='input_format',
+    help='Choose a format to output the ciphertext. Options: hex, bytes, c-array. [Optional]')
     # Reading input file
     args = parser.parse_args()
     inputfile = args.input_file
@@ -96,7 +72,8 @@ def main():
         for i in range(0, len(hex_string), 2):
             c_array += f"0x{hex_string[i:i+2]}, "
         c_array = c_array.rstrip(', ')
-        print(f"C Array = {{ {c_array} }};")
+        print("C-ARRAY:")
+        print(f"unsigned char xored_shellcode[] = {{ {c_array} }};")
 
     # Saving the output to a file
     outputfile = args.output_file
@@ -104,7 +81,8 @@ def main():
     outputpath.parent.mkdir(parents=True, exist_ok=True)
     with open(outputpath, "wb") as file:
         file.write(ciphertext)
-    print(f"Successfully saved file as {outputpath}")
+    print(f"\nSuccessfully saved file as {outputpath}")
 
 if __name__ == "__main__":
     main()
+
