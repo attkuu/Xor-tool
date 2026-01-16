@@ -1,6 +1,6 @@
 # XOR obuscation tool
 
-This is an XOR obfuscation tool that uses a 1-byte hexadecimal key to encrypt the contents of a file and save the result to a new file.
+This is a XOR obfuscation tool that uses a 1-byte hexadecimal key to encrypt the contents of a file and save the result to a new file.
 
 ## Usage:
 -i, --input: The name of the input file.
