@@ -17,7 +17,7 @@ def main():
         --input, -i: Path to the file to be obfuscated.
         --output, -o: Path where the obfuscated file will be saved.
         --key, -k: A 1-byte hex string (e.g., '0xAA' or 'FF') used as the XOR key.
-        --format, -f: Optional output display format (hex, bytes, or c-array).
+        --format, -f: Optional output display format (python, raw, or c-array).
     """
     parser = argparse.ArgumentParser(description ="A XOR obfuscation tool.")
     parser.add_argument('--input','-i', required=True,dest='input_file',
@@ -26,8 +26,8 @@ def main():
     help='The name of the output file.')
     parser.add_argument('--key','-k', required=True,dest='input_key',
     help='1 byte hexadecimal string.')
-    parser.add_argument('--format','-f', choices=["hex", "bytes", "c-array"],dest='input_format',
-    help='Choose a format to output the ciphertext. Options: hex, bytes, c-array. [Optional]')
+    parser.add_argument('--format','-f', choices=["python", "raw", "c-array"],dest='input_format',
+    help='Choose a format to output the ciphertext. Options: python, raw, c-array. [Optional]')
     # Reading input file
     args = parser.parse_args()
     inputfile = args.input_file
@@ -62,10 +62,12 @@ def main():
 
     # Printing output
     formatinput = args.input_format
-    if formatinput == "hex":
-        print(f"Ciphertext (hex): {ciphertext.hex()}")
-    elif formatinput == "bytes":
-        print(f"Ciphertext (bytes): {ciphertext!r}")
+    if formatinput == "python":
+        # Formats each byte as a hex value inside a standard Python list
+        formatted_list = [f"0x{b:02x}" for b in ciphertext]
+        print(f"Ciphertext (python-list): [{', '.join(formatted_list)}]")
+    elif formatinput == "raw":
+        print(f"Ciphertext (raw bytes): {ciphertext!r}")
     elif formatinput == "c-array":
         hex_string = ciphertext.hex()
         c_array = ""
