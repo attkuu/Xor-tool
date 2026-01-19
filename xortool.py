@@ -19,10 +19,6 @@ def main():
     """
     Parses command-line arguments and performs XOR obfuscation on a file.
     Command-line Arguments:
-        --input, -i: Path to the file to be obfuscated.
-        --output, -o: Path where the obfuscated file will be saved.
-        --key, -k: A 1-byte hex string ('0xAA' or 'FF' for example) used as the XOR key.
-        --format, -f: Optional output display format (python, raw, or c-array).
     """
     parser = argparse.ArgumentParser(description ="A XOR obfuscation tool.")
     # Required arguments
