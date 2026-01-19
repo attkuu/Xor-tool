@@ -12,8 +12,8 @@ from pathlib import Path
 import pyfiglet
 
 # Print banner with pyfiglet
-result = pyfiglet.figlet_format("XOR OBFUSCATOR", font="small")
-print(result)
+banner = pyfiglet.figlet_format("XOR OBFUSCATOR", font="small")
+print(banner)
 
 def main():
     """
