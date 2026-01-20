@@ -9,6 +9,7 @@ multiple output formats.
 import sys
 import argparse
 from pathlib import Path
+import array
 import pyfiglet
 
 def print_banner():
@@ -37,10 +38,10 @@ def print_output(formatinput, ciphertext):
     Prints the ciphertext to the console based on the chosen format.
 
     """
-    # Prints a Python list
+    # Prints a Python array
     if formatinput == "python":
-        formatted = ", ".join([f"0x{b:02x}" for b in ciphertext])
-        print(f"Ciphertext (python-list): [{formatted}]")
+        python_array =  array.array("B", ciphertext)
+        print(f"Ciphertext (python-array): {python_array}")
     # Prints raw bytes
     elif formatinput == "raw":
         print(f"Ciphertext (raw bytes): {ciphertext!r}")
@@ -65,7 +66,7 @@ def main():
     help='1 byte hexadecimal string.')
     # Optional argument
     parser.add_argument('--format','-f', choices=["python", "raw", "c-array"],dest='output_format',
-    help='Choose a format to output the ciphertext. Options: python, raw, c-array. [Optional]')
+    help='Choose a format to output the ciphertext. Options: python-array, raw, c-array. [Optional]')
     args = parser.parse_args()
 
     # Printing the banner
@@ -116,4 +117,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
