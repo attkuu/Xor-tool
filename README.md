@@ -1,4 +1,4 @@
-# XOR obuscation tool
+# XOR obfuscation tool
 
 This is a XOR obfuscation tool that uses a 1-byte hexadecimal key to encrypt the contents of a file and save the result to a new file.
 
@@ -26,4 +26,5 @@ Ciphertext (python-array): array('B', [9, 36, 45, 45, 46, 75])
 
 C-array:
 unsigned char xored_shellcode[] = { 0x09, 0x24, 0x2d, 0x2d, 0x2e };
+
 
